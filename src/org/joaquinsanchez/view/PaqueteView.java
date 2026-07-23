@@ -1,13 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package org.joaquinsanchez.view;
 
-/**
- *
- * @author informatica
- */
-public class PaqueteView {
+import javafx.application.Application;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.stage.Stage;
+
+
+public class PaqueteView{
+
+     private TabPane panelPestana = new TabPane(); 
     
+    public PaqueteView(){
+        iniciarVista(); 
+    }
+    
+    private void iniciarVista(){
+        //formulario Resgistro
+        Tab tablaRegistro = new Tab("Registro");
+        
+        
+        //formulario Lista Resumen
+        Tab tablaResumen = new Tab("Lista Resumen");
+        
+        panelPestana.getTabs().addAll(tablaRegistro, tablaResumen);
+    }
+    
+    public TabPane getPanelPestana(){
+        return panelPestana; 
+    }
+    
+    public void setPanelPestana(TabPane panelPestana){
+        this.panelPestana = panelPestana; 
+    }
 }
