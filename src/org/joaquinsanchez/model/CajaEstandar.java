@@ -45,10 +45,18 @@ public class CajaEstandar extends Paquete {
     
      @Override
     public double calculoTotal() {
+        //volumen de la caja en cm3, usado como base del costo de envio
         return (double) this.alto * this.ancho * this.largo; 
     }
+
+    @Override
+    public String getTipo() {
+        return "Caja Estándar";
+    }
+
+    @Override
+    public String getDetalle() {
+        return String.format("%.1f x %.1f x %.1f cm", ancho, largo, alto);
+    }
  
-    
-    
-    
 }
