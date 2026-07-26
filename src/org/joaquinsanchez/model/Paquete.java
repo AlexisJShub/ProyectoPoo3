@@ -1,10 +1,10 @@
 package org.joaquinsanchez.model;
 
 public abstract class Paquete {
-    //atributos 
-    private String id;  
-    
-    //constructores 
+    //atributos
+    private String id;
+
+    //constructores
 
     public Paquete() {
     }
@@ -12,8 +12,8 @@ public abstract class Paquete {
     public Paquete(String id) {
         this.id = id;
     }
-    
-    // metodos 
+
+    // metodos
 
     public String getId() {
         return id;
@@ -23,9 +23,14 @@ public abstract class Paquete {
         this.id = id;
     }
 
-    //metodo abstracto para heredar 
-    //metodo abstracto no lleva cuerpo o sea sin {} 
-    public abstract double calculoTotal(); 
-    
-    
+    //metodo abstracto para heredar
+    //metodo abstracto no lleva cuerpo osea sin {}
+    public abstract double calculoTotal();
+
+    //tipo del paquete
+    public abstract String getTipo();
+
+    //detalle de las medidas 
+    public abstract String getDetalle();
+
 }
