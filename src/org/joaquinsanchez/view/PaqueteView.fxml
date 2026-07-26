@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<TabPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+         fx:controller="org.joaquinsanchez.controller.PaqueteController"
+         tabClosingPolicy="UNAVAILABLE" prefWidth="480" prefHeight="640"
+         style="-fx-background-color: #f2f4f7;">
+    <tabs>
+
+        <!-- ==================== PESTAÑA REGISTRO ==================== -->
+        <Tab text="Registro">
+            <content>
+                <StackPane style="-fx-background-color: #f2f4f7;">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <children>
+                        <VBox spacing="12"
+                              style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 24; -fx-effect: dropshadow(gaussian, rgba(31,42,68,0.15), 12, 0, 0, 4);">
+                            <children>
+                                <Label text="Registrar Paquete" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1f2a44;"/>
+
+                                <Label text="ID del Paquete:" style="-fx-font-weight: bold; -fx-text-fill: #4a5568;"/>
+                                <TextField fx:id="txtId" promptText="Ej: PAQ-001"/>
+
+                                <Label text="Tipo de Paquete:" style="-fx-font-weight: bold; -fx-text-fill: #4a5568;"/>
+                                <ComboBox fx:id="cbTipoPaquete" promptText="Seleccione un tipo de paquete"
+                                          maxWidth="Infinity" onAction="#manejarTipoPaquete"/>
+
+                                <!-- aqui el controlador inserta dinamicamente los campos segun el tipo elegido -->
+                                <VBox fx:id="panelCambiante" spacing="12"/>
+
+                                <Button fx:id="btnGuardar" text="Registrar Paquete" maxWidth="Infinity"
+                                        onAction="#guardarPaquete"
+                                        style="-fx-background-color: #2f6feb; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 10 22 10 22; -fx-cursor: hand;"/>
+
+                                <Label fx:id="lblEstado" wrapText="true"/>
+                            </children>
+                        </VBox>
+                    </children>
+                </StackPane>
+            </content>
+        </Tab>
+
+        <!-- ==================== PESTAÑA LISTA RESUMEN ==================== -->
+        <Tab text="Lista Resumen">
+            <content>
+                <StackPane style="-fx-background-color: #f2f4f7;">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <children>
+                        <VBox spacing="15"
+                              style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 24; -fx-effect: dropshadow(gaussian, rgba(31,42,68,0.15), 12, 0, 0, 4);">
+                            <children>
+                                <Label text="Paquetes Registrados" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #1f2a44;"/>
+
+                                <TableView fx:id="tablaResumen" VBox.vgrow="ALWAYS">
+                                    <columns>
+                                        <TableColumn fx:id="colId" text="ID" prefWidth="90"/>
+                                        <TableColumn fx:id="colTipo" text="Tipo" prefWidth="120"/>
+                                        <TableColumn fx:id="colDetalle" text="Detalle" prefWidth="170"/>
+                                        <TableColumn fx:id="colTotal" text="Total" prefWidth="100"/>
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </VBox>
+                    </children>
+                </StackPane>
+            </content>
+        </Tab>
+
+    </tabs>
+</TabPane>
