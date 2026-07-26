@@ -18,13 +18,12 @@ public class PaqueteView {
 
     private TabPane panelPestana = new TabPane();
 
-    //nodos del formulario
+    //los nodos
     private TextField txtId = new TextField();
     private ComboBox<String> cbTipoPaquete = new ComboBox<>();
     private VBox panelCambiante = new VBox(12);
 
     //elementos y atributos de cada paquete
-    //Caja Estandar
     private TextField txtAncho = new TextField();
     private TextField txtLargo = new TextField();
     private TextField txtAlto = new TextField();
@@ -34,7 +33,7 @@ public class PaqueteView {
     private TextField txtLongitud = new TextField();
     private TextField txtDiametro = new TextField();
 
-    //nodos interactivos
+    //nodos interactivos: boton, mensaje de estado y tabla resumen
     private Button btnGuardar = new Button("Registrar Paquete");
     private Label lblEstado = new Label();
     private TableView<Paquete> tablaResumen = new TableView<>();
@@ -47,7 +46,7 @@ public class PaqueteView {
         panelPestana.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
         panelPestana.getStyleClass().add("tab-pane-principal");
 
-        //Formulario 
+        //Formulario
         Tab tabRegistro = new Tab("Registro");
         tabRegistro.setClosable(false);
 
@@ -77,7 +76,7 @@ public class PaqueteView {
         stackRegistro.getChildren().add(tarjetaRegistro);
         tabRegistro.setContent(stackRegistro);
 
-        //pestaña lista
+        //Pestaña de Lista 
         Tab tabResumen = new Tab("Lista Resumen");
         tabResumen.setClosable(false);
 
@@ -119,7 +118,7 @@ public class PaqueteView {
         tablaResumen.getColumns().addAll(colId, colTipo, colDetalle, colTotal);
     }
 
-    //Los metodos para cambiar el panel a elegir
+    //los paneles cambiantes
 
     public void mostrarCaja() {
         panelCambiante.getChildren().clear();
@@ -177,8 +176,7 @@ public class PaqueteView {
         }
     }
 
- // getters y los setters
-
+    //getters y setters 
     public TabPane getPanelPestana() {
         return panelPestana;
     }
