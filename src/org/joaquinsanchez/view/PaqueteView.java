@@ -98,4 +98,82 @@ public class PaqueteView {
         panelPestana.getTabs().addAll(tabRegistro, tabResumen);
     }
 
+    private void construirColumnasTabla() {
+        TableColumn<Paquete, String> colId = new TableColumn<>("ID");
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colId.setPrefWidth(90);
+
+        TableColumn<Paquete, String> colTipo = new TableColumn<>("Tipo");
+        colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        colTipo.setPrefWidth(120);
+
+        TableColumn<Paquete, String> colDetalle = new TableColumn<>("Detalle");
+        colDetalle.setCellValueFactory(new PropertyValueFactory<>("detalle"));
+        colDetalle.setPrefWidth(170);
+
+        TableColumn<Paquete, Number> colTotal = new TableColumn<>("Total");
+        colTotal.setCellValueFactory(datos ->
+                new javafx.beans.property.SimpleDoubleProperty(datos.getValue().calculoTotal()));
+        colTotal.setPrefWidth(100);
+
+        tablaResumen.getColumns().addAll(colId, colTipo, colDetalle, colTotal);
+    }
+
+    //Los metodos para cambiar el panel a elegir
+
+    public void mostrarCaja() {
+        panelCambiante.getChildren().clear();
+        txtAncho.setPromptText("Ej: 30.0");
+        txtLargo.setPromptText("Ej: 40.0");
+        txtAlto.setPromptText("Ej: 20.0");
+        panelCambiante.getChildren().addAll(
+                new Label("Ancho (cm):"), txtAncho,
+                new Label("Largo (cm):"), txtLargo,
+                new Label("Alto (cm):"), txtAlto);
+    }
+
+    public void mostrarSobre() {
+        panelCambiante.getChildren().clear();
+        txtPeso.setPromptText("Ej: 0.5");
+        panelCambiante.getChildren().addAll(new Label("Peso (kg):"), txtPeso);
+    }
+
+    public void mostrarTubo() {
+        panelCambiante.getChildren().clear();
+        txtLongitud.setPromptText("Ej: 60.0");
+        txtDiametro.setPromptText("Ej: 10.0");
+        panelCambiante.getChildren().addAll(
+                new Label("Longitud (cm):"), txtLongitud,
+                new Label("Diámetro (cm):"), txtDiametro);
+    }
+
+    public void limpiarPanelCambiante() {
+        panelCambiante.getChildren().clear();
+    }
+
+    public void limpiarCampos() {
+        txtId.clear();
+        txtAncho.clear();
+        txtLargo.clear();
+        txtAlto.clear();
+        txtPeso.clear();
+        txtLongitud.clear();
+        txtDiametro.clear();
+    }
+
+    public void mostrarMensajeExito(String mensaje) {
+        lblEstado.setText(mensaje);
+        lblEstado.getStyleClass().removeAll("etiqueta-error");
+        if (!lblEstado.getStyleClass().contains("etiqueta-exito")) {
+            lblEstado.getStyleClass().add("etiqueta-exito");
+        }
+    }
+
+    public void mostrarMensajeError(String mensaje) {
+        lblEstado.setText(mensaje);
+        lblEstado.getStyleClass().removeAll("etiqueta-exito");
+        if (!lblEstado.getStyleClass().contains("etiqueta-error")) {
+            lblEstado.getStyleClass().add("etiqueta-error");
+        }
+    }
 }
