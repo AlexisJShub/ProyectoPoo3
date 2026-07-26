@@ -22,7 +22,7 @@ import org.joaquinsanchez.model.TuboEnvio;
 
 public class PaqueteController implements Initializable {
 
-    //nodos del fxml
+    //nodos 
     @FXML private TextField txtId;
     @FXML private ComboBox<String> cbTipoPaquete;
     @FXML private VBox panelCambiante;
@@ -56,8 +56,8 @@ public class PaqueteController implements Initializable {
         colDetalle.setCellValueFactory(new PropertyValueFactory<>("detalle"));
         colTotal.setCellValueFactory(datos -> new SimpleDoubleProperty(datos.getValue().calculoTotal()));
 
-        //la tabla queda conectada directamente a la lista cualquier paquete que
-        //se agregue aparece agregado en Lista Resumen
+       //campos dinamicos segun el tipo de paquete seleccionado (no vienen del fxml,
+    //se crean en tiempo de ejecucion y se insertan en panelCambiante)
         tablaResumen.setItems(listaPaquetes);
         tablaResumen.setPlaceholder(new Label("Aún no hay paquetes registrados."));
     }
@@ -114,4 +114,77 @@ public class PaqueteController implements Initializable {
                 new Label("Diámetro (cm):"), txtDiametro);
     }
 
+    //enlazado por onAction="#guardarPaquete" en el boton del fxml
+    @FXML
+    private void guardarPaquete() {
+        String id = txtId.getText().trim();
+        String tipo = cbTipoPaquete.getValue();
+
+        if (id.isEmpty()) {
+            mostrarMensajeError("Ingresa el ID del paquete.");
+            return;
+        }
+        if (tipo == null) {
+            mostrarMensajeError("Selecciona un tipo de paquete.");
+            return;
+        }
+
+        Paquete nuevoPaquete = null;
+
+        try {
+            switch (tipo) {
+                case "Caja Estándar":
+                    float ancho = Float.parseFloat(txtAncho.getText().trim());
+                    float largo = Float.parseFloat(txtLargo.getText().trim());
+                    float alto = Float.parseFloat(txtAlto.getText().trim());
+                    if (ancho <= 0 || largo <= 0 || alto <= 0) {
+                        throw new IllegalArgumentException("Las medidas de la caja deben ser mayores a 0.");
+                    }
+                    nuevoPaquete = new CajaEstandar(id, ancho, largo, alto);
+                    break;
+
+                case "Sobre":
+                    float peso = Float.parseFloat(txtPeso.getText().trim());
+                    if (peso <= 0) {
+                        throw new IllegalArgumentException("El peso del sobre debe ser mayor a 0.");
+                    }
+                    nuevoPaquete = new Sobre(id, peso);
+                    break;
+
+                case "Tubo de Envío":
+                    float longitud = Float.parseFloat(txtLongitud.getText().trim());
+                    float diametro = Float.parseFloat(txtDiametro.getText().trim());
+                    if (longitud <= 0 || diametro <= 0) {
+                        throw new IllegalArgumentException("Las medidas del tubo deben ser mayores a 0.");
+                    }
+                    nuevoPaquete = new TuboEnvio(id, longitud, diametro);
+                    break;
+            }
+        } catch (NumberFormatException ex) {
+            mostrarMensajeError("Ingresa valores numéricos válidos en todos los campos.");
+            return;
+        } catch (IllegalArgumentException ex) {
+            mostrarMensajeError(ex.getMessage());
+            return;
+        }
+
+        listaPaquetes.add(nuevoPaquete);
+
+        mostrarMensajeExito("Paquete " + nuevoPaquete.getId() + " registrado. Total: "
+                + String.format("%.2f", nuevoPaquete.calculoTotal()));
+
+        txtId.clear();
+        panelCambiante.getChildren().clear();
+        cbTipoPaquete.getSelectionModel().clearSelection();
+    }
+
+    private void mostrarMensajeExito(String mensaje) {
+        lblEstado.setText(mensaje);
+        lblEstado.setStyle("-fx-text-fill: #1a7f37; -fx-font-weight: bold;");
+    }
+
+    private void mostrarMensajeError(String mensaje) {
+        lblEstado.setText(mensaje);
+        lblEstado.setStyle("-fx-text-fill: #c0392b; -fx-font-weight: bold;");
+    }
 }
