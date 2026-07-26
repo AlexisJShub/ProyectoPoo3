@@ -176,4 +176,111 @@ public class PaqueteView {
             lblEstado.getStyleClass().add("etiqueta-error");
         }
     }
+
+ // getters y los setters
+
+    public TabPane getPanelPestana() {
+        return panelPestana;
+    }
+
+    public void setPanelPestana(TabPane panelPestana) {
+        this.panelPestana = panelPestana;
+    }
+
+    public TextField getTxtId() {
+        return txtId;
+    }
+
+    public void setTxtId(TextField txtId) {
+        this.txtId = txtId;
+    }
+
+    public ComboBox<String> getCbTipoPaquete() {
+        return cbTipoPaquete;
+    }
+
+    public void setCbTipoPaquete(ComboBox<String> cbTipoPaquete) {
+        this.cbTipoPaquete = cbTipoPaquete;
+    }
+
+    public VBox getPanelCambiante() {
+        return panelCambiante;
+    }
+
+    public void setPanelCambiante(VBox panelCambiante) {
+        this.panelCambiante = panelCambiante;
+    }
+
+    public TextField getTxtAncho() {
+        return txtAncho;
+    }
+
+    public void setTxtAncho(TextField txtAncho) {
+        this.txtAncho = txtAncho;
+    }
+
+    public TextField getTxtLargo() {
+        return txtLargo;
+    }
+
+    public void setTxtLargo(TextField txtLargo) {
+        this.txtLargo = txtLargo;
+    }
+
+    public TextField getTxtAlto() {
+        return txtAlto;
+    }
+
+    public void setTxtAlto(TextField txtAlto) {
+        this.txtAlto = txtAlto;
+    }
+
+    public TextField getTxtPeso() {
+        return txtPeso;
+    }
+
+    public void setTxtPeso(TextField txtPeso) {
+        this.txtPeso = txtPeso;
+    }
+
+    public TextField getTxtLongitud() {
+        return txtLongitud;
+    }
+
+    public void setTxtLongitud(TextField txtLongitud) {
+        this.txtLongitud = txtLongitud;
+    }
+
+    public TextField getTxtDiametro() {
+        return txtDiametro;
+    }
+
+    public void setTxtDiametro(TextField txtDiametro) {
+        this.txtDiametro = txtDiametro;
+    }
+
+    public Button getBtnGuardar() {
+        return btnGuardar;
+    }
+
+    public void setBtnGuardar(Button btnGuardar) {
+        this.btnGuardar = btnGuardar;
+    }
+
+    public Label getLblEstado() {
+        return lblEstado;
+    }
+
+    public void setLblEstado(Label lblEstado) {
+        this.lblEstado = lblEstado;
+    }
+
+    public TableView<Paquete> getTablaResumen() {
+        return tablaResumen;
+    }
+
+    public void setTablaResumen(TableView<Paquete> tablaResumen) {
+        this.tablaResumen = tablaResumen;
+    }
+
 }
